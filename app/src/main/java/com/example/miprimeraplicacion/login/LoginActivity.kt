@@ -1,5 +1,6 @@
 package com.example.miprimeraplicacion.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.example.miprimeraplicacion.R
+import com.example.miprimeraplicacion.data.Data
 import com.example.miprimeraplicacion.data.User
 import com.example.miprimeraplicacion.data.UserLogged
 import com.example.miprimeraplicacion.data.UserLoginStatus
@@ -16,6 +18,8 @@ import com.example.miprimeraplicacion.databinding.ActivityLoginBinding
 import com.example.miprimeraplicacion.databinding.ActivityMainBinding
 import com.example.miprimeraplicacion.register.RegisterActivity
 import com.example.miprimeraplicacion.tools.Tools
+import com.example.miprimeraplicacion.utils.extension_fun.getBooleanSharedPreferences
+import com.example.miprimeraplicacion.utils.extension_fun.setBooleanSharedPreferences
 
 
 class LoginActivity : AppCompatActivity() {
@@ -52,6 +56,20 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setUpListeners(){
+
+        binding.tvActivityLoginList.setOnClickListener{
+            val listCount = Data.getUserList().count().toString()
+            /*val sharedPreferences = getSharedPreferences("User_Logged", Context.MODE_PRIVATE)
+            val userLogged = sharedPreferences.getBoolean("login",false)
+            */
+            val userLogged = getBooleanSharedPreferences("login",false)
+
+            Tools.showToast(this, userLogged.toString())
+
+
+
+        }
+
 
         binding.btnActivityLoginRegister.setOnClickListener{
             Tools.showToast(this, "Registro presionado.")
@@ -126,6 +144,20 @@ class LoginActivity : AppCompatActivity() {
                 userName = userText) {loginEnum, userLogged ->
                     when(loginEnum){
                         LoginEnum.SUCCESS -> {
+                            setBooleanSharedPreferences("login", true)
+
+                            /*
+                            val sharedPreferences =
+                                getSharedPreferences("User_Logged", Context.MODE_PRIVATE)
+                            val editor=sharedPreferences.edit()
+                            editor.putBoolean("login",true)
+                            editor.apply()
+                            */
+
+                            /** TODO Guardar datos nombre,telephoni, en sp
+                             */
+
+
                             UserLogged.setUserLogged(userLogged)
                             goToWelcomeView()}
                         LoginEnum.FAILURE -> showLoginTvError()

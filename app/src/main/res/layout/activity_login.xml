@@ -83,6 +83,23 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <TextView
+            android:id="@+id/tv_activity_login_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/activity_login_tv_list"
+            android:textColor="#3F51B5"
+            android:textSize="20dp"
+
+
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btn_activity_login_register"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_activity_login_error" />
 
         <TextView
             android:id="@+id/tv_activity_login_error"
