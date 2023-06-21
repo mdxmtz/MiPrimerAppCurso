@@ -43,8 +43,10 @@ class LoginActivity : AppCompatActivity() {
         //Toast.makeText(this,"La vista ha sido cargada", Toast.LENGTH_SHORT).show()
         with(binding){
             btnActivityLoginLogin.isEnabled =false
-            binding.tvActivityLoginError.text="El usuario o contraseña estan mal"
-            binding.btnActivityLoginLogin.text="Login"
+            binding.tvActivityLoginError.text=getString(R.string.activity_login_tv_error)
+            binding.btnActivityLoginLogin.text=getString(R.string.activity_login_btn_login)
+            binding.btnActivityLoginRegister.text=getString(R.string.activity_login_btn_registro)
+            tvActivityLoginError.visibility=View.GONE
         }
 
     }

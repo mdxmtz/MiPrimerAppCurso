@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">MiPrimerAplicacion</string>
     <string name="label">Usuario</string>
+    <string name="name">Manuel</string>
+
+    <!-- Login -->
+    <string name="activity_login_til_password">Contraseña</string>
+    <string name="activity_login_tv_error">Usuario o contraseña erroneas</string>
+    <string name="activity_login_btn_registro">Registro</string>
+    <string name="activity_login_btn_login">Login</string>
+
+
+    <!-- Welcome -->
+    <string name="activity_welcome_tv_welcome">Bienvenido :D</string>
+
 </resources>
