@@ -1,17 +1,11 @@
 package com.example.miprimeraplicacion.login
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.miprimeraplicacion.R
-import com.example.miprimeraplicacion.data.UserLogged
-import com.example.miprimeraplicacion.databinding.ActivityLoginBinding
 
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.miprimeraplicacion.databinding.ActivityWelcomeBinding
 import com.example.miprimeraplicacion.splash.SplashActivity
-import com.example.miprimeraplicacion.tools.Tools
-import com.example.miprimeraplicacion.utils.extension_fun.getBooleanSharedPreferences
 import com.example.miprimeraplicacion.utils.extension_fun.setBooleanSharedPreferences
 
 class WelcomeActivity : AppCompatActivity() {
@@ -48,8 +42,11 @@ class WelcomeActivity : AppCompatActivity() {
 
         ///val title = getString(R.string.welcome_activity_title, user.name, user.phoneNumber)
 
+        //val name=getStringSharedPreferences("name","")
 
-        binding.tvActivityWelcomeTitle.text= title
+
+
+        binding.tvActivityWelcomeTitle.text= "Manuel Hardcoded"
         /** TODO
          * Obtener los datos de share preference y mostarlos
          * en el Textview

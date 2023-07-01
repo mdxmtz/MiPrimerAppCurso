@@ -16,6 +16,16 @@ object Data {
         userList.add(user)
     }
 
+
+    fun getUserByUsrname(un:String):User?{
+        userList.forEach {
+            if(it.userName.equals(un))
+                return it
+
+        }
+        return null
+    }
+
     fun getUserList () = userList
 
 

@@ -16,6 +16,18 @@ fun Activity.setBooleanSharedPreferences(
     editor.apply()
 }
 
+fun Activity.setStringSharedPreferences(
+    sharedPreferenceId: String,
+    value : String){
+
+    val sharedPreferences =
+        getSharedPreferences("UserSharedPreferences", Context.MODE_PRIVATE)
+    val editor=sharedPreferences.edit()
+    editor.putString(sharedPreferenceId,value)
+    editor.apply()
+}
+
+
 fun Activity.getBooleanSharedPreferences(
     sharedPreferenceId: String,
     defaultValue : Boolean):Boolean{
@@ -23,7 +35,18 @@ fun Activity.getBooleanSharedPreferences(
         getSharedPreferences("UserSharedPreferences", Context.MODE_PRIVATE)
     return sharedPreferences.getBoolean(sharedPreferenceId,defaultValue)
 }
+/*
+fun Activity.getStringSharedPreferences(
+    sharedPreferenceId: String,
+    defaultValue : String):String{
+    val sharedPreferences =
+        getSharedPreferences("UserSharedPreferences", Context.MODE_PRIVATE)
+    val value= sharedPreferences.getString(sharedPreferenceId,defaultValue)
+    Log.i("Value: $value",value)
 
+    return value
+}
+*/
 fun Activity.getValues(){
     val sharedPreferences =
         getSharedPreferences("UserSharedPreferences", Context.MODE_PRIVATE)
