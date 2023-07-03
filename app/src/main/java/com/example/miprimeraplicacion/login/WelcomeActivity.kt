@@ -10,6 +10,9 @@ import com.example.miprimeraplicacion.utils.extension_fun.setBooleanSharedPrefer
 
 class WelcomeActivity : AppCompatActivity() {
 
+
+    // TODO: Agregar Lottie
+
     lateinit var binding: ActivityWelcomeBinding
 
 
@@ -19,7 +22,7 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        //setContentView(R.layout.activity_welcome)
+        //setContentView(R.layout.activity_welcome)j
 
         setUpView()
 
