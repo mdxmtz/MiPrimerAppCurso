@@ -9,7 +9,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.miprimeraplicacion.databinding.ActivitySplashBinding
 import com.example.miprimeraplicacion.login.LoginActivity
+import com.example.miprimeraplicacion.login.LoginNCActivity
 import com.example.miprimeraplicacion.login.WelcomeActivity
+import com.example.miprimeraplicacion.login.ui.LoginFragment
 import com.example.miprimeraplicacion.utils.extension_fun.getBooleanSharedPreferences
 import com.example.miprimeraplicacion.utils.extension_fun.getValues
 import com.example.miprimeraplicacion.utils.extension_fun.showToast
@@ -63,7 +65,7 @@ class SplashActivity : AppCompatActivity() {
                 Intent(this, WelcomeActivity::class.java).also { startActivity(it) }
             else
                 //Intent(this,LoginNCActivity::class.java).also { startActivity(it) }
-                Intent(this, LoginActivity::class.java).also { startActivity(it) }
+                Intent(this, LoginNCActivity::class.java).also { startActivity(it) }
             finish()
         },5_000)
 
