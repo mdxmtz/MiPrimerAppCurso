@@ -3,6 +3,7 @@ package com.example.miprimeraplicacion.utils.extension_fun
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import androidx.fragment.app.Fragment
 
 
 fun Activity.setBooleanSharedPreferences(
@@ -33,6 +34,14 @@ fun Activity.getBooleanSharedPreferences(
     defaultValue : Boolean):Boolean{
     val sharedPreferences =
         getSharedPreferences("UserSharedPreferences", Context.MODE_PRIVATE)
+    return sharedPreferences.getBoolean(sharedPreferenceId,defaultValue)
+}
+
+fun Fragment.getBooleanSharedPreferences(
+    sharedPreferenceId: String,
+    defaultValue : Boolean):Boolean{
+    val sharedPreferences =
+        requireActivity().getSharedPreferences("UserSharedPreferences", Context.MODE_PRIVATE)
     return sharedPreferences.getBoolean(sharedPreferenceId,defaultValue)
 }
 /*

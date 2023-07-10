@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.EditText
 import com.example.miprimeraplicacion.R
 import com.example.miprimeraplicacion.data.Data
-import com.example.miprimeraplicacion.databinding.ActivityLoginBinding
+
 import com.example.miprimeraplicacion.databinding.ActivityRegisterBinding
 import com.example.miprimeraplicacion.tools.Tools
 import com.google.android.material.textfield.TextInputLayout

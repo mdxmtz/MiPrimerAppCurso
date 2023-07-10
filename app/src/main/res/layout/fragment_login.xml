@@ -17,7 +17,57 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login.LoginActivity">
+        android:paddingBottom="10dp"
+        tools:context=".login.ui.LoginFragment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/til_fragment_login_version"
+
+            android:hint="@string/activity_login_til_login_version"
+            android:textColorHint="#2196F3"
+            android:textAlignment="center"
+            app:helperText="@string/activity_login_til_user_version_helper_text"
+
+            app:counterMaxLength="3"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="120dp"
+            android:gravity="center"
+            app:boxStrokeColor="@color/til_color_default_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#673AB7"
+                android:maxLength="3"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_fragment_login_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="1.0.0">
+
+        </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -145,13 +195,15 @@
             android:layout_height="80dp"
             android:text="@string/activity_login_btn_login"
 
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintVertical_bias="0.244" />
-
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
