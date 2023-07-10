@@ -1,33 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    tools:context=".recycle.ui.RecycleFragment"
+    android:layout_margin="8dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp"
+    tools:context=".recycler.ui.RecyclerFragment"
 
     >
-
-    <TextView
-        android:id="@+id/item_recycler_text"
-        android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:gravity="center"
-        android:text="HOLA"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/item_recycler_text"
-        />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_recycler_image"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="@null"
+            />
+
+        <TextView
+            android:id="@+id/tv_item_recycler_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            tools:text="Nombre de usuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_item_recycler_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="16dp"
+            android:textStyle="italic"
+            tools:text="Edad de usuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_recycler_name"
+            />
+
+        <TextView
+            android:id="@+id/tv_item_recycler_address_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Direccion"
+            android:textSize="16dp"
+            android:textStyle="italic"
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_recycler_age"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_item_recycler_address_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Direccion"
+            android:textSize="16dp"
+            android:textStyle="italic"
+            android:maxLines="1"
+            android:layout_marginStart="5dp"
+            tools:text="Direccion de usuario"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_recycler_address_title"
+            />
+
+        <Button
+            android:id="@+id/btn_item_recycler_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalles"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

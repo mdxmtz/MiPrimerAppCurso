@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
-    tools:context=".recycle.ui.RecycleFragment"
+    android:layout_marginTop="18dp"
+    android:layout_marginEnd="18dp"
+    android:layout_marginStart="18dp"
+    android:layout_marginBottom="80dp"
+    tools:context=".recycler.ui.RecyclerFragment"
 
     >
 

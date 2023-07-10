@@ -119,14 +119,6 @@ class LoginFragment : Fragment() {
         binding.tilFragmentLoginUser.editText?.doOnTextChanged { text, start, before, count ->
             val valorDelEditText = text.toString()
             binding.tvFragmentLoginError.visibility=View.GONE
-            /*Log.i("Royal","Start $start")
-            Log.i("Royal","Before: $before")
-            Log.i("Royal","Count: $count")
-
-             */
-            //Tools.showToast(this, valorDelEditText)
-            //Sintaxis if (eval) return1 else return2
-            //val valor1 = if(10>4) "SI" else "NO"
 
             // Version Java
             binding.btnFragmentLoginLogin.isEnabled =!valorDelEditText.trim().isEmpty()
