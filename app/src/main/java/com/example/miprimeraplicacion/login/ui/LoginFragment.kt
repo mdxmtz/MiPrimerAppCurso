@@ -9,20 +9,29 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.miprimeraplicacion.R
 import com.example.miprimeraplicacion.data.Data
 import com.example.miprimeraplicacion.data.UserLogged
+import com.example.miprimeraplicacion.data.room.AppDataBase
+import com.example.miprimeraplicacion.data.room.dao.UserDao
+import com.example.miprimeraplicacion.data.room.entities.UserEntity
 import com.example.miprimeraplicacion.databinding.FragmentLoginBinding
 import com.example.miprimeraplicacion.login.LoginEnum
 import com.example.miprimeraplicacion.login.LoginViewModel
 import com.example.miprimeraplicacion.login.WelcomeActivity
 import com.example.miprimeraplicacion.register.RegisterActivity
 import com.example.miprimeraplicacion.tools.Tools
+import com.example.miprimeraplicacion.utils.extension_fun.addUser
+import com.example.miprimeraplicacion.utils.extension_fun.getAllUsers
 import com.example.miprimeraplicacion.utils.extension_fun.getBooleanSharedPreferences
+import com.example.miprimeraplicacion.utils.extension_fun.getDb
 import com.example.miprimeraplicacion.utils.extension_fun.setBooleanSharedPreferences
 import com.example.miprimeraplicacion.utils.extension_fun.setStringSharedPreferences
 import com.example.miprimeraplicacion.utils.extension_fun.showToast
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -93,7 +102,46 @@ class LoginFragment : Fragment() {
             loginViewModel.appVersion.value=version
 
              */
-            findNavController().navigate(R.id.action_loginFragment_to_recycleFragment)
+            //findNavController().navigate(R.id.action_loginFragment_to_recycleFragment)
+
+
+
+
+            val usuario = UserEntity(
+                email="juan@gmail.com",
+                name = "Juan",
+                phoneNumber = "1234567891",
+                password = "123456",
+                userLogin = "juan"
+            )
+
+            val usuario2 = UserEntity(
+                email="mario@sdf.cp",
+                name = "Mario",
+                phoneNumber = "1234567891",
+                password = "123456",
+                userLogin = "mario"
+            )
+
+
+
+            lifecycleScope.launch {
+
+                val userDao: UserDao =getDb().userDao
+                /*userDao.insertUser(usuario)
+                showToast("Usuario Agregado")
+                */
+                getDb().addUser(usuario)
+                delay(1000)
+
+                getDb().addUser(usuario2)
+                val userList = getDb().getAllUsers()
+                showToast("el tamaño de la lista es ${userList.size} ")
+
+            }
+
+
+
         }
 
 

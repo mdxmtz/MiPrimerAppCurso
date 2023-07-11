@@ -30,10 +30,12 @@
         android:label="fragment_recycle"
         tools:layout="@layout/fragment_recycle" >
         <action
-            android:id="@+id/action_recycleFragment_to_registerFragment"
-            app:destination="@id/registerFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"
-            />
+            android:id="@+id/action_recycleFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.example.miprimeraplicacion.login.ui.bottom_sheet.DetailBottomSheetDialogFragment"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" />
 </navigation>

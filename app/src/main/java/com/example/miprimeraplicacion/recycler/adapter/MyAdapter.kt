@@ -2,8 +2,12 @@ package com.example.miprimeraplicacion.recycler.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.miprimeraplicacion.R
+import com.example.miprimeraplicacion.recycler.data.ItemSelectedValue
 import com.example.miprimeraplicacion.recycler.data.UserItem
 import com.example.miprimeraplicacion.utils.extension_fun.showToast
 
@@ -35,10 +39,19 @@ class MyAdapter(private val dataList:List<UserItem>) : RecyclerView.Adapter<MyVi
 
             holder.btnDetail.setOnClickListener {
                 contexto.showToast("Click en ${name} , edad: ${age}", )
+            }
+
+            holder.btnSheet.setOnClickListener {
+                ItemSelectedValue.selectUser(userItem)
+
+                //findNavController().navigate(R.id.action_loginFragment_to_recycleFragment)
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_recycleFragment_to_bottomSheetFragment)
 
 
             }
 
+
+            Glide.with(contexto).load(imageURLValue).into(holder.ivUserProfile)
 
         }
 

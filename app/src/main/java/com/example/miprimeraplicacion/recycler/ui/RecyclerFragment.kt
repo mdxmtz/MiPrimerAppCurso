@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.miprimeraplicacion.databinding.FragmentRecycleBinding
 import com.example.miprimeraplicacion.recycler.adapter.MyAdapter
 import com.example.miprimeraplicacion.recycler.data.Address
+import com.example.miprimeraplicacion.recycler.data.ItemSelectedValue
 import com.example.miprimeraplicacion.recycler.data.UserItem
 
 class RecyclerFragment : Fragment() {
@@ -69,7 +70,7 @@ class RecyclerFragment : Fragment() {
         )
 
         val addressDefault=Address()
-
+//imageURLValue="https://www.anipedia.net/imagenes/tortuga-boba.jpg"
         val address2 = Address(
             number = "605",
             zipCode = 56874,
@@ -79,28 +80,38 @@ class RecyclerFragment : Fragment() {
         val user1= UserItem(
             name = "Alan",
             address = address1,
-            age = 38
+            age = 38,
+            imageURLValue = "https://inaturalist-open-data.s3.amazonaws.com/photos/202126881/original.jpg"
         )
         val user2= UserItem(
             name = "Juan",
             address = addressDefault,
-            age = 15
+            age = 15,
+            imageURLValue = "https://static.wikia.nocookie.net/reinoanimalia/images/5/58/Tigre_de_bengala_wiki.png/revision/latest/thumbnail/width/360/height/360?cb=20130303105615&path-prefix=es"
         )
 
         val user3= UserItem(
             name = "Manuel",
             address = address2,
-            age = 22
+            age = 22,
+            imageURLValue = "https://www.eltiempo.com/uploads/2023/02/14/63eb993c6cb20.png"
+
         )
 
         val user4= UserItem(
             name = "Angel",
             address = address1,
-            age = 46
+            age = 46,
+            imageURLValue = "https://static.fundacion-affinity.org/cdn/farfuture/PVbbIC-0M9y4fPbbCsdvAD8bcjjtbFc0NSP3lRwlWcE/mtime:1643275542/sites/default/files/los-10-sonidos-principales-del-perro.jpg"
         )
         val user5= UserItem()
 
         return listOf(user1,user2,user3,user4,user5)
+    }
+
+    override fun onDetach(){
+        super.onDetach()
+        ItemSelectedValue.clearUser()
     }
 
 
