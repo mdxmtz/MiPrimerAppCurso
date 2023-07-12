@@ -6,7 +6,8 @@ import android.widget.Toast
 import com.example.miprimeraplicacion.data.Data
 
 import com.example.miprimeraplicacion.data.User
-import com.example.miprimeraplicacion.login.LoginEnum
+import com.example.miprimeraplicacion.login.status.LoginEnum
+
 import java.util.Locale
 
 object Tools {

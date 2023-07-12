@@ -1,6 +1,7 @@
 package com.example.miprimeraplicacion.utils.extension_fun
 
 import android.app.Activity
+import android.content.Context
 import androidx.fragment.app.Fragment
 
 import com.example.miprimeraplicacion.data.room.AppDataBase
@@ -26,5 +27,11 @@ suspend fun Activity.insertUser(userEntity: UserEntity) =
 
 suspend fun Activity.getAllUser(userEntity: UserEntity) =
     AppDataBase.getDatabase(this).userDao.getUsers()
+
+private fun Fragment.getDB() = AppDataBase.getDatabase(requireContext())
+
+private fun Activity.getDB() = AppDataBase.getDatabase(this)
+
+fun getDBInstance(context : Context) = AppDataBase.getDatabase(context)
 
 

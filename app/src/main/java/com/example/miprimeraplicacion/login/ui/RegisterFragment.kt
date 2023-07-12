@@ -9,15 +9,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.miprimeraplicacion.R
 import com.example.miprimeraplicacion.data.Data
+import com.example.miprimeraplicacion.data.room.dao.UserDao
+import com.example.miprimeraplicacion.data.room.entities.UserEntity
 import com.example.miprimeraplicacion.databinding.FragmentLoginBinding
 import com.example.miprimeraplicacion.databinding.FragmentRegisterBinding
 import com.example.miprimeraplicacion.login.LoginViewModel
+import com.example.miprimeraplicacion.login.status.InsertUserDBStatus
 import com.example.miprimeraplicacion.tools.Tools
+import com.example.miprimeraplicacion.utils.extension_fun.addUser
+import com.example.miprimeraplicacion.utils.extension_fun.getAllUsers
+import com.example.miprimeraplicacion.utils.extension_fun.getDb
 import com.example.miprimeraplicacion.utils.extension_fun.showToast
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class RegisterFragment : Fragment() {
@@ -72,52 +81,63 @@ class RegisterFragment : Fragment() {
         binding.btnFragmentRegisterRegistrar.text = "Registrar Usuario"
     }
 
-    private fun setUpListeners(){
+    private fun setUpListeners() {
 
         binding.btnFragmentRegisterRegistrar.setOnClickListener {
 
-            binding.clFragmentRegisterContainer.visibility = View.VISIBLE
+            with(binding) {
 
-            //val name : String = binding.tilActivityRegisterName.editText?.text.toString()
-            val name : String = binding.tilFragmentRegisterName.getText()
-            val email : String = binding.tilFragmentRegisterEmail.getText()
-            val phone : String = binding.tilFragmentRegisterPhone.getText();
-            val password : String = binding.tilFragmentRegisterPassword.getText()
+                val usuario=getUserByTils()
 
-            val userToSaveInCache= Tools.createUser(
-                name =name,
-                email = email,
-                phoneNumber = phone,
-                password = password
-            )
-            /*
-                        val handler = Handler(Logger.getMainLooper())
+                binding.btnFragmentRegisterRegistrar.isEnabled = false
 
-                        Handler.postDelayed({
-                            Data.addUser(userToSaveInCache)
-                            finish()
-                        }, 4000)*/
+                registerViewModel.insertUserVM(requireContext(), usuario) {
+                    when (it) {
+                        InsertUserDBStatus.Load -> {
+                            binding.clFragmentRegisterContainer.visibility = View.VISIBLE
+                        }
 
-            Handler(Looper.getMainLooper()).postDelayed({
+                        InsertUserDBStatus.HideLoader -> binding.clFragmentRegisterContainer.visibility =
+                            View.GONE
 
-                val userName = userToSaveInCache.userName
+                        is InsertUserDBStatus.Failure -> {
+                            binding.btnFragmentRegisterRegistrar.isEnabled = true
+                            showToast(it.errorMessage)
+                        }
 
-                Tools.showToast(requireContext(), "Registro exitoso, tu usuario es $userName")
-                /*
-                if (userLogged)
-                    Intent(this,WelcomeActivity::class.java).also { startActivity(it) }
-                else
-                    Intent(this,LoginNCActivity::class.java).also { startActivity(it) }
-                */
-                //finish()
+                        is InsertUserDBStatus.Success -> {
+                            showToast(it.successMessage)
+                            // Cerrar vista
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        }
+                    }
+                }
 
-                Data.addUser(userToSaveInCache)
-                findNavController().navigate(R.id.loginFragment)
-
-            },1_000)
+            }
 
         }
 
+
+    }
+
+    private fun getUserByTils() :UserEntity{
+        with(binding){
+            val name: String = tilFragmentRegisterName.getText()
+            val email: String = tilFragmentRegisterEmail.getText()
+            val phone: String = tilFragmentRegisterPhone.getText();
+            val password: String = tilFragmentRegisterPassword.getText()
+            val tel = Integer.parseInt(phone)
+
+            val usuario = UserEntity(
+                userId = tel,
+                email = email,
+                name = name,
+                phoneNumber = phone,
+                password = password
+            )
+            return usuario
+
+        }
     }
 
     fun TextInputLayout.getText():String{
