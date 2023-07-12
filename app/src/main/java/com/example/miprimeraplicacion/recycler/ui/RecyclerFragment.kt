@@ -6,11 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.miprimeraplicacion.data.retrofit.RetrofitConnection
+import com.example.miprimeraplicacion.data.retrofit.entity.get_character.GetCharacterResponse
+import com.example.miprimeraplicacion.data.retrofit.entity.get_character.Result
 import com.example.miprimeraplicacion.databinding.FragmentRecycleBinding
 import com.example.miprimeraplicacion.recycler.adapter.MyAdapter
 import com.example.miprimeraplicacion.recycler.data.Address
 import com.example.miprimeraplicacion.recycler.data.ItemSelectedValue
 import com.example.miprimeraplicacion.recycler.data.UserItem
+import com.example.miprimeraplicacion.recycler.enums.SetData
+import com.example.miprimeraplicacion.utils.extension_fun.showToast
+import com.example.miprimeraplicacion.utils.extension_fun.toUserItemList
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class RecyclerFragment : Fragment() {
 
@@ -18,6 +29,7 @@ class RecyclerFragment : Fragment() {
     private val binding get() = _binding!!
 
 
+    private val getDataSource = SetData.Retrofit
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,22 +45,38 @@ class RecyclerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpView()
+        when(getDataSource){
+            SetData.Retrofit -> getFromRetrofit()
+            SetData.Dummy -> getDummyData()
+        }
+
+        //setUpView()
+
     }
 
-    private fun setUpView() {
-/*
-        val data :List<String> = listOf<String>("Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe",
-            "Alan","Manuel","Juan","Jose", "Guadalupe"
-        )
+    private fun getFromRetrofit() {
 
- */
+        RetrofitConnection().apiService.getCharacters().enqueue(object: Callback<GetCharacterResponse>{
+            override fun onResponse(
+                call: Call<GetCharacterResponse>,
+                response: Response<GetCharacterResponse>
+            ) {
+                val characterList = response.body()?.results?: emptyList()
+                showInRecycler(characterList)
+                showToast("Todo bien en retrofit")
+
+            }
+
+            override fun onFailure(call: Call<GetCharacterResponse>, t: Throwable) {
+                //showToast("Error")
+                showToast("Error en retrofit")
+            }
+
+        })
+    }
+
+    private fun getDummyData() {
+
         val userItemList :List<UserItem> = getUserItem()
 
         val myAdapter = MyAdapter(dataList = userItemList)
@@ -61,19 +89,20 @@ class RecyclerFragment : Fragment() {
     }
 
     /**
+     *
      * Obtiene los valores de una lista de UserItem
      */
     private fun getUserItem(): List<UserItem> {
         val address1 = Address(
-            number = "10",
-            zipCode = 66636
+            number = 10,
+            zipCode = "66636"
         )
 
         val addressDefault=Address()
 //imageURLValue="https://www.anipedia.net/imagenes/tortuga-boba.jpg"
         val address2 = Address(
-            number = "605",
-            zipCode = 56874,
+            number = 605,
+            zipCode = "56874",
             streetName = "Benito"
 
         )
@@ -112,6 +141,16 @@ class RecyclerFragment : Fragment() {
     override fun onDetach(){
         super.onDetach()
         ItemSelectedValue.clearUser()
+    }
+
+    /* Cargar datos remotos*/
+    private fun showInRecycler(list:List<Result>){
+        val myAdapter = MyAdapter(list.toUserItemList())
+
+        with(binding){
+            rvFragmentRecycler.layoutManager=LinearLayoutManager(requireContext())
+            rvFragmentRecycler.adapter=myAdapter
+        }
     }
 
 

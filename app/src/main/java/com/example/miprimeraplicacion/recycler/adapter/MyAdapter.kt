@@ -1,5 +1,6 @@
 package com.example.miprimeraplicacion.recycler.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -51,7 +52,12 @@ class MyAdapter(private val dataList:List<UserItem>) : RecyclerView.Adapter<MyVi
             }
 
 
-            Glide.with(contexto).load(imageURLValue).into(holder.ivUserProfile)
+            try {
+                Glide.with(contexto).load(imageURLValue).into(holder.ivUserProfile)
+            }catch (e: Exception ){
+                Log.w("Royal","URL: "+imageURLValue+", Message: "+e.message)
+
+            }
 
         }
 

@@ -32,6 +32,7 @@
             android:text="TextView"
             android:textSize="18dp"
             android:textStyle="bold"
+            android:maxLines="1"
             tools:text="Nombre de usuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_recycler_image"
